@@ -110,7 +110,7 @@ urlpatterns = [
         r'categories/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Category.objects.all(),
-            serializer_class=serializers.CategorySerializer),
+            serializer_class=serializers.DeepCategorySerializer),
         name='category-update'),
     path(
         'attributes/',

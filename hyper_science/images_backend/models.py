@@ -72,6 +72,9 @@ class Category(BaseModelClass):
     name = models.CharField(max_length=100)
     parent = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return '{} ({})'.format(self.name,self.uuid)
+
 
 class AttributeDefinition(BaseModelClass):
     name = models.CharField(max_length=100)

@@ -56,6 +56,15 @@ class CategorySerializer(serializers.ModelSerializer):
         model = models.Category
         fields = '__all__'
 
+class DeepCategorySerializer(serializers.ModelSerializer):
+    children=serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Category
+        fields = '__all__'
+    
+    def get_children(self, obj):
+      return [DeepCategorySerializer().to_representation(cat) for cat in obj.category_set.all()]
 
 class AttributeDefinitionSerializer(serializers.ModelSerializer):
     class Meta:
