@@ -65,7 +65,7 @@ class Classification(BaseModelClass):
 
 class Category(BaseModelClass):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('Category', on_delete=models.CASCADE)
+    parent = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
 
 
 class AttributeDefinition(BaseModelClass):
