@@ -101,13 +101,13 @@ urlpatterns = [
             serializer_class=serializers.ClassificationSerializer),
         name='classification-update'),
     path(
-        'categorys/',
+        'categories/',
         generics.ListCreateAPIView.as_view(
             queryset=models.Category.objects.all(),
             serializer_class=serializers.CategorySerializer),
         name='category-list'),
     path(
-        'categorys/<uuid:pk>/',
+        'categories/<uuid:pk>/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Category.objects.all(),
             serializer_class=serializers.CategorySerializer),
