@@ -74,7 +74,7 @@ class AttributeDefinition(BaseModelClass):
     description = models.CharField(max_length=100)
 
 
-class InstanceValues(BaseModelClass):
+class InstanceValue(BaseModelClass):
     # instance is the actual category with specific values.
     instance = models.ForeignKey('Category', on_delete=models.CASCADE)
     attribute = models.ForeignKey('AttributeDefinition', on_delete=models.CASCADE)

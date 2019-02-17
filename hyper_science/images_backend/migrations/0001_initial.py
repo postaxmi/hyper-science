@@ -9,126 +9,215 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='BaseModelClass',
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('uuid',
+                 models.UUIDField(
+                     default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
             ],
         ),
         migrations.CreateModel(
             name='Acquisition',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('date', models.DateTimeField()),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('title', models.CharField(max_length=100)),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='AttributeDefinition',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('name', models.CharField(max_length=100)),
                 ('kind', models.CharField(max_length=100)),
                 ('description', models.CharField(max_length=100)),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('name', models.CharField(max_length=100)),
-                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
+                ('parent',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Classification',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('confidence', models.FloatField()),
-                ('category_assigned', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
+                ('category_assigned',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Detector',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Image',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('name', models.CharField(max_length=100)),
                 ('width', models.PositiveIntegerField()),
                 ('height', models.PositiveIntegerField()),
                 ('url', models.URLField()),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='InstanceValues',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('value', models.CharField(max_length=100)),
-                ('attribute', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.AttributeDefinition')),
-                ('instance', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
+                ('attribute',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE,
+                     to='images_backend.AttributeDefinition')),
+                ('instance',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE, to='images_backend.Category')),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Instrument',
             fields=[
-                ('basemodelclass_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.BaseModelClass')),
+                ('basemodelclass_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.BaseModelClass')),
                 ('name', models.CharField(max_length=100)),
                 ('location', models.CharField(max_length=100)),
             ],
-            bases=('images_backend.basemodelclass',),
+            bases=('images_backend.basemodelclass', ),
         ),
         migrations.CreateModel(
             name='Algorithm',
             fields=[
-                ('detector_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.Detector')),
+                ('detector_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.Detector')),
                 ('name', models.CharField(max_length=100)),
                 ('version', models.CharField(max_length=100)),
             ],
-            bases=('images_backend.detector',),
+            bases=('images_backend.detector', ),
         ),
         migrations.CreateModel(
             name='Person',
             fields=[
-                ('detector_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='images_backend.Detector')),
+                ('detector_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='images_backend.Detector')),
                 ('name', models.CharField(max_length=100)),
                 ('surname', models.CharField(max_length=100)),
                 ('email', models.EmailField(max_length=254)),
                 ('institution', models.CharField(max_length=100)),
             ],
-            bases=('images_backend.detector',),
+            bases=('images_backend.detector', ),
         ),
         migrations.AddField(
             model_name='classification',
             name='detector_analyzer',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Detector'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='images_backend.Detector'),
         ),
         migrations.AddField(
             model_name='classification',
             name='image_classified',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Image'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='images_backend.Image'),
         ),
         migrations.AddField(
             model_name='article',
@@ -138,12 +227,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='acquisition',
             name='image_source',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Image'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='images_backend.Image'),
         ),
         migrations.AddField(
             model_name='acquisition',
             name='instrument_used',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='images_backend.Instrument'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='images_backend.Instrument'),
         ),
         migrations.AddField(
             model_name='article',
