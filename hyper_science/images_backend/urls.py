@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
@@ -15,8 +15,8 @@ urlpatterns = [
         generics.ListCreateAPIView.as_view(
             queryset=models.Person.objects.all(), serializer_class=serializers.PersonSerializer),
         name='person-list'),
-    path(
-        'persons/<uuid:pk>/',
+    re_path(
+        r'persons/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Person.objects.all(), serializer_class=serializers.PersonSerializer),
         name='person-update'),
@@ -26,8 +26,8 @@ urlpatterns = [
             queryset=models.Instrument.objects.all(),
             serializer_class=serializers.InstrumentSerializer),
         name='instrument-list'),
-    path(
-        'instruments/<uuid:pk>/',
+    re_path(
+        r'instruments/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Instrument.objects.all(),
             serializer_class=serializers.InstrumentSerializer),
@@ -38,8 +38,8 @@ urlpatterns = [
             queryset=models.Detector.objects.all(),
             serializer_class=serializers.DetectorSerializer),
         name='detector-list'),
-    path(
-        'detectors/<uuid:pk>/',
+    re_path(
+        r'detectors/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Detector.objects.all(),
             serializer_class=serializers.DetectorSerializer),
@@ -50,8 +50,8 @@ urlpatterns = [
             queryset=models.Acquisition.objects.all(),
             serializer_class=serializers.AcquisitionSerializer),
         name='acquisition-list'),
-    path(
-        'acquisitions/<uuid:pk>/',
+    re_path(
+        r'acquisitions/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Acquisition.objects.all(),
             serializer_class=serializers.AcquisitionSerializer),
@@ -61,8 +61,8 @@ urlpatterns = [
         generics.ListCreateAPIView.as_view(
             queryset=models.Image.objects.all(), serializer_class=serializers.ImageSerializer),
         name='image-list'),
-    path(
-        'images/<uuid:pk>/',
+    re_path(
+        r'images/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Image.objects.all(), serializer_class=serializers.ImageSerializer),
         name='image-update'),
@@ -72,8 +72,8 @@ urlpatterns = [
             queryset=models.Algorithm.objects.all(),
             serializer_class=serializers.AlgorithmSerializer),
         name='algorithm-list'),
-    path(
-        'algorithms/<uuid:pk>/',
+    re_path(
+        r'algorithms/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Algorithm.objects.all(),
             serializer_class=serializers.AlgorithmSerializer),
@@ -83,8 +83,8 @@ urlpatterns = [
         generics.ListCreateAPIView.as_view(
             queryset=models.Article.objects.all(), serializer_class=serializers.ArticleSerializer),
         name='article-list'),
-    path(
-        'articles/<uuid:pk>/',
+    re_path(
+        r'articles/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Article.objects.all(), serializer_class=serializers.ArticleSerializer),
         name='article-update'),
@@ -94,8 +94,8 @@ urlpatterns = [
             queryset=models.Classification.objects.all(),
             serializer_class=serializers.ClassificationSerializer),
         name='classification-list'),
-    path(
-        'classifications/<uuid:pk>/',
+    re_path(
+        r'classifications/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Classification.objects.all(),
             serializer_class=serializers.ClassificationSerializer),
@@ -106,8 +106,8 @@ urlpatterns = [
             queryset=models.Category.objects.all(),
             serializer_class=serializers.CategorySerializer),
         name='category-list'),
-    path(
-        'categories/<uuid:pk>/',
+    re_path(
+        r'categories/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.Category.objects.all(),
             serializer_class=serializers.CategorySerializer),
@@ -118,8 +118,8 @@ urlpatterns = [
             queryset=models.AttributeDefinition.objects.all(),
             serializer_class=serializers.AttributeDefinitionSerializer),
         name='attribute-list'),
-    path(
-        'attributes/<uuid:pk>/',
+    re_path(
+        r'attributes/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.AttributeDefinition.objects.all(),
             serializer_class=serializers.AttributeDefinitionSerializer),
@@ -130,8 +130,8 @@ urlpatterns = [
             queryset=models.InstanceValue.objects.all(),
             serializer_class=serializers.InstanceValueSerializer),
         name='instance-list'),
-    path(
-        'instances/<uuid:pk>/',
+    re_path(
+        r'instances/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.InstanceValue.objects.all(),
             serializer_class=serializers.InstanceValueSerializer),

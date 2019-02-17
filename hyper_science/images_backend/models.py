@@ -3,8 +3,13 @@ from django.db import models
 import uuid
 
 
+def uuid_without_hypens():
+    return uuid.uuid4().hex
+
+
 class BaseModelClass(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.CharField(
+        primary_key=True, default=uuid_without_hypens, editable=False, max_length=32)
 
 
 class Detector(BaseModelClass):
