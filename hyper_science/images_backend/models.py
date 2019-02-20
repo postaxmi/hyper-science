@@ -64,26 +64,45 @@ class Article(BaseModelClass):
 class Classification(BaseModelClass):
     image_classified = models.ForeignKey('Image', on_delete=models.CASCADE)
     detector_analyzer = models.ForeignKey('Detector', on_delete=models.CASCADE)
-    category_assigned = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category_assigned = models.ForeignKey('CategoryDefinition', on_delete=models.CASCADE)
     confidence = models.FloatField()
 
 
-class Category(BaseModelClass):
+class CategoryDefinition(BaseModelClass):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
+    parent = models.ForeignKey(
+        'self', related_name='children', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return '{} ({})'.format(self.name,self.uuid)
+        return "'{}' ({}, parent: {})".format(self.name, self.uuid,
+                                              self.parent.uuid if self.parent else None)
 
 
 class AttributeDefinition(BaseModelClass):
     name = models.CharField(max_length=100)
-    kind = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+
+    _BOOL, _INT, _DOUBLE, _STR = "B", "I", "D", "S"
+    _TYPE_CHOICES = (
+        (_BOOL, 'Boolean'),
+        (_INT, 'Integer'),
+        (_DOUBLE, 'Double'),
+        (_STR, 'String'),
+    )
+    # This stores the type of value saved in the InstanceValue instance.
+    value_type = models.CharField(max_length=1)
+
+
+class CategoryDictionary(BaseModelClass):
+    """This class is made up of dictionary of attributes linked to categories."""
+    category = models.ForeignKey('CategoryDefinition', on_delete=models.CASCADE)
+    attribute = models.ForeignKey('AttributeDefinition', on_delete=models.CASCADE)
 
 
 class InstanceValue(BaseModelClass):
-    # instance is the actual category with specific values.
-    instance = models.ForeignKey('Category', on_delete=models.CASCADE)
-    attribute = models.ForeignKey('AttributeDefinition', on_delete=models.CASCADE)
-    value = models.CharField(max_length=100)  # this should be a jolly tpye
+    """Store the actual value for the concept/dictionary in CategoryDictionary."""
+
+    category_dict = models.ForeignKey(CategoryDictionary, on_delete=models.CASCADE)
+    # This field stores the actual value the user defines, in JSON format, that we need to validate
+    # in the category_dict.attribute_definition.value_type field.
+    value = models.TextField()

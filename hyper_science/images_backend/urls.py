@@ -100,16 +100,18 @@ urlpatterns = [
             queryset=models.Classification.objects.all(),
             serializer_class=serializers.ClassificationSerializer),
         name='classification-update'),
+    # If we apply the DeepCategorySerializer also to the list view, we would see the tree and then
+    # all the children repeated again.
     path(
         'categories/',
         generics.ListCreateAPIView.as_view(
-            queryset=models.Category.objects.all(),
-            serializer_class=serializers.CategorySerializer),
+            queryset=models.CategoryDefinition.objects.all(),
+            serializer_class=serializers.CategoryDefinitionSerializer),
         name='category-list'),
     re_path(
         r'categories/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
-            queryset=models.Category.objects.all(),
+            queryset=models.CategoryDefinition.objects.all(),
             serializer_class=serializers.DeepCategorySerializer),
         name='category-update'),
     path(

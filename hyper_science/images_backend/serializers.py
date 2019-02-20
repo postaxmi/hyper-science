@@ -51,20 +51,22 @@ class ClassificationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategoryDefinitionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Category
+        model = models.CategoryDefinition
         fields = '__all__'
+
 
 class DeepCategorySerializer(serializers.ModelSerializer):
-    children=serializers.SerializerMethodField()
+    children = serializers.SerializerMethodField()
 
     class Meta:
-        model = models.Category
+        model = models.CategoryDefinition
         fields = '__all__'
-    
+
     def get_children(self, obj):
-      return [DeepCategorySerializer().to_representation(cat) for cat in obj.category_set.all()]
+        return [DeepCategorySerializer().to_representation(cat) for cat in obj.children.all()]
+
 
 class AttributeDefinitionSerializer(serializers.ModelSerializer):
     class Meta:
