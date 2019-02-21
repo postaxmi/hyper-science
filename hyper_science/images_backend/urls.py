@@ -1,5 +1,4 @@
 from django.urls import path, re_path
-
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from rest_framework import generics
@@ -100,20 +99,6 @@ urlpatterns = [
             queryset=models.Classification.objects.all(),
             serializer_class=serializers.ClassificationSerializer),
         name='classification-update'),
-    # If we apply the DeepCategorySerializer also to the list view, we would see the tree and then
-    # all the children repeated again.
-    path(
-        'categories/',
-        generics.ListCreateAPIView.as_view(
-            queryset=models.CategoryDefinition.objects.all(),
-            serializer_class=serializers.CategoryDefinitionSerializer),
-        name='category-list'),
-    re_path(
-        r'categories/(?P<pk>[\w\d]{32})/',
-        generics.RetrieveUpdateDestroyAPIView.as_view(
-            queryset=models.CategoryDefinition.objects.all(),
-            serializer_class=serializers.DeepCategorySerializer),
-        name='category-update'),
     path(
         'attributes/',
         generics.ListCreateAPIView.as_view(
@@ -138,6 +123,14 @@ urlpatterns = [
             queryset=models.InstanceValue.objects.all(),
             serializer_class=serializers.InstanceValueSerializer),
         name='article-update'),
+    # Defined externally because of filters.
+    path('categories/', views.CategoryDefinitionListCreateAPI.as_view(), name='category-list'),
+    re_path(
+        r'categories/(?P<pk>[\w\d]{32})/',
+        generics.RetrieveUpdateDestroyAPIView.as_view(
+            queryset=models.CategoryDefinition.objects.all(),
+            serializer_class=serializers.DeepCategorySerializer),
+        name='category-update'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'xml', 'html'])

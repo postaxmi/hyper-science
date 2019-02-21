@@ -1,12 +1,11 @@
-from rest_framework import viewsets
-from images_backend import serializers
-from images_backend import models
-from rest_framework import generics
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-# class RetrieveUpdateDestroyAPIPersonView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = models.Person.objects.all()
-#     serializer_class = serializers.PersonSerializer
+from images_backend import models, serializers, filters
 
-# class ListCreateAPIPersonView(generics.ListCreateAPIView):
-#     queryset = models.Person.objects.all()
-#     serializer_class = serializers.PersonSerializer
+
+# If we were to apply the DeepCategorySerializer also to the list view, we would see the tree and
+# all the children repeated again.
+class CategoryDefinitionListCreateAPI(ListCreateAPIView):
+    queryset = models.CategoryDefinition.objects.all()
+    serializer_class = serializers.CategoryDefinitionSerializer
+    filterset_class = filters.CategoryDefinitionFilter

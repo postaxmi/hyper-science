@@ -1,6 +1,5 @@
-from django.db import models
-
 import uuid
+from django.db import models
 
 
 def uuid_without_hypens():
@@ -82,25 +81,29 @@ class AttributeDefinition(BaseModelClass):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
 
-    _BOOL, _INT, _DOUBLE, _STR = "B", "I", "D", "S"
+    _BOOL, _INT, _DOUBLE, _STR = 'B', 'I', 'D', 'S'
     _TYPE_CHOICES = (
+        (_STR, 'String'),
         (_BOOL, 'Boolean'),
         (_INT, 'Integer'),
         (_DOUBLE, 'Double'),
-        (_STR, 'String'),
     )
     # This stores the type of value saved in the InstanceValue instance.
-    value_type = models.CharField(max_length=1)
+    value_type = models.CharField(max_length=1, choices=_TYPE_CHOICES, default=_STR)
 
 
 class CategoryDictionary(BaseModelClass):
-    """This class is made up of dictionary of attributes linked to categories."""
+    """This class contains definitions of attributes.
+
+    Every Category can have attributes/properties that are defined here, and then instantiated as
+    `InstanceValue' objects.
+    """
     category = models.ForeignKey('CategoryDefinition', on_delete=models.CASCADE)
     attribute = models.ForeignKey('AttributeDefinition', on_delete=models.CASCADE)
 
 
 class InstanceValue(BaseModelClass):
-    """Store the actual value for the concept/dictionary in CategoryDictionary."""
+    """Store the actual value for the concept/dictionary defined in CategoryDictionary."""
 
     category_dict = models.ForeignKey(CategoryDictionary, on_delete=models.CASCADE)
     # This field stores the actual value the user defines, in JSON format, that we need to validate
