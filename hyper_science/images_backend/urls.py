@@ -139,6 +139,8 @@ urlpatterns = [
             queryset=models.CategoryDictionary.objects.all(),
             serializer_class=serializers.CategoryDictionarySerializer),
         name='category_concepts-update'),
+        
+    url(r'^explorer/', include('explorer.urls')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'xml'])
