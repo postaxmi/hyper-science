@@ -78,3 +78,9 @@ class InstanceValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.InstanceValue
         fields = '__all__'
+
+class CategoryDictionarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CategoryDictionary
+        fields = '__all__'
+        depth = 1

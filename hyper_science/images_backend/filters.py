@@ -14,3 +14,14 @@ class CategoryDefinitionFilter(filters.FilterSet):
             'uuid': ['exact'],
             'parent': ['exact'],
         }
+
+
+class CategoryDictionaryFilter(filters.FilterSet):
+    class Meta:
+        model = models.CategoryDictionary
+
+        fields = {
+            'uuid': ['exact'],
+            'category__uuid': ['exact'],
+            'attribute__uuid': ['exact'],
+        }

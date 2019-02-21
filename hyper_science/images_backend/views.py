@@ -9,3 +9,10 @@ class CategoryDefinitionListCreateAPI(ListCreateAPIView):
     queryset = models.CategoryDefinition.objects.all()
     serializer_class = serializers.CategoryDefinitionSerializer
     filterset_class = filters.CategoryDefinitionFilter
+
+
+class CategoryDictionaryListCreateAPI(ListCreateAPIView):
+    queryset = models.CategoryDictionary.objects.all()
+    serializer_class = serializers.CategoryDictionarySerializer
+    filterset_class = filters.CategoryDictionaryFilter
+

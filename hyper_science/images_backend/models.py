@@ -76,7 +76,7 @@ class CategoryDefinition(BaseModelClass):
         return "'{}' ({}, parent: {})".format(self.name, self.uuid,
                                               self.parent.uuid if self.parent else None)
 
-
+# this is concept
 class AttributeDefinition(BaseModelClass):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
@@ -91,7 +91,7 @@ class AttributeDefinition(BaseModelClass):
     # This stores the type of value saved in the InstanceValue instance.
     value_type = models.CharField(max_length=1, choices=_TYPE_CHOICES, default=_STR)
 
-
+# this is the many to many relatinonships between concepts and categories
 class CategoryDictionary(BaseModelClass):
     """This class contains definitions of attributes.
 
@@ -101,10 +101,10 @@ class CategoryDictionary(BaseModelClass):
     category = models.ForeignKey('CategoryDefinition', on_delete=models.CASCADE)
     attribute = models.ForeignKey('AttributeDefinition', on_delete=models.CASCADE)
 
-
+# this is the measure of a concept for a given image
 class InstanceValue(BaseModelClass):
-    """Store the actual value for the concept/dictionary defined in CategoryDictionary."""
-
+    """Store the actual value for the concept/dictionary defined in CategoryDictionary related to an image."""
+    image_source = models.ForeignKey('Image', on_delete=models.CASCADE)
     category_dict = models.ForeignKey(CategoryDictionary, on_delete=models.CASCADE)
     # This field stores the actual value the user defines, in JSON format, that we need to validate
     # in the category_dict.attribute_definition.value_type field.

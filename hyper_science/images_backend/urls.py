@@ -100,13 +100,13 @@ urlpatterns = [
             serializer_class=serializers.ClassificationSerializer),
         name='classification-update'),
     path(
-        'attributes/',
+        'concepts/',
         generics.ListCreateAPIView.as_view(
             queryset=models.AttributeDefinition.objects.all(),
             serializer_class=serializers.AttributeDefinitionSerializer),
         name='attribute-list'),
     re_path(
-        r'attributes/(?P<pk>[\w\d]{32})/',
+        r'concepts/(?P<pk>[\w\d]{32})/',
         generics.RetrieveUpdateDestroyAPIView.as_view(
             queryset=models.AttributeDefinition.objects.all(),
             serializer_class=serializers.AttributeDefinitionSerializer),
@@ -131,6 +131,14 @@ urlpatterns = [
             queryset=models.CategoryDefinition.objects.all(),
             serializer_class=serializers.DeepCategorySerializer),
         name='category-update'),
+    path(
+        'category_concepts/', views.CategoryDictionaryListCreateAPI.as_view(), name='category-concepts'),
+    re_path(
+        r'category_concepts/(?P<pk>[\w\d]{32})/',
+        generics.RetrieveUpdateDestroyAPIView.as_view(
+            queryset=models.CategoryDictionary.objects.all(),
+            serializer_class=serializers.CategoryDictionarySerializer),
+        name='category_concepts-update'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'xml'])
