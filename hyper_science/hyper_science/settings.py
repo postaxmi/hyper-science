@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'images_backend.apps.ImagesBackendConfig',
     'rest_framework',
-    # Django Rest Framework extension that provides filters on urls semi-automatically.
+    # Provides support for ?format=xml urls.
+    'rest_framework_xml',
+    # Django Rest Framework extension that creates filters on urls semi-automatically.
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -118,5 +120,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend', )
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend', ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework_xml.parsers.XMLParser',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_xml.renderers.XMLRenderer',
+    ),
 }

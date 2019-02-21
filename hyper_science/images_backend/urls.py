@@ -133,4 +133,4 @@ urlpatterns = [
         name='category-update'),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'xml', 'html'])
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'xml'])
