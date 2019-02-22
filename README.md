@@ -26,14 +26,14 @@ $ pipenv install
 To populate the database with some test data, use:
 ```console
 $ pipenv shell
-$ ./hyper-science/manage.py migrate
-$ ./hyper-science/example-db-populator.py
+$ ./hyper_science/manage.py migrate
+$ ./hyper_science/example-db-populator.py
 ```
 
 To run the development server, use:
 ```console
 $ pipenv shell
-$ ./hyper-science/manage.py runserver
+$ ./hyper_science/manage.py runserver
 ```
 
 

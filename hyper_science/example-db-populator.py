@@ -18,12 +18,12 @@ if __name__ == "__main__":
         ["Surface", None],
         ["Films", "Surface"],
         ["Coated", "Films"],
-        ["Electronics",None],
+        ["Electronics", None],
         ["MEMS", "Electronics"],
         ["Nanowires", "Electronics"],
         ["Particles", None],
         ["Patterned", "Surface"],
-        ["Sponge",None],
+        ["Sponge", None],
         ["Porous", "Sponge"],
         ["Powder", None],
         ["Tips", None],
@@ -68,31 +68,29 @@ if __name__ == "__main__":
             name=child,
             parent=models.CategoryDefinition.objects.get(name=parent) if parent else None)
 
-
     # create some concepts
     # concept for MEMS
-    for concept in ["conductivity","corrosion","resistance","hardness","current load", "weight"]:
+    for concept in [
+            "conductivity", "corrosion", "resistance", "hardness", "current load", "weight"
+    ]:
         attribute, created = models.AttributeDefinition.objects.get_or_create(
-            name=concept,
-            description=concept + " description",
-            value_type= "D"
-        )
+            name=concept, description=concept + " description", value_type="D")
         models.CategoryDictionary.objects.get_or_create(
-            attribute=attribute,
-            category = models.CategoryDefinition.objects.get(
-                name="MEMS"
-            )
-        )
+            attribute=attribute, category=models.CategoryDefinition.objects.get(name="MEMS"))
     # add last attribute to other category
     models.CategoryDictionary.objects.get_or_create(
-        attribute=attribute,
-        category = models.CategoryDefinition.objects.get(
-            name="Biological"
-        )
+        attribute=attribute, category=models.CategoryDefinition.objects.get(name="Biological"))
+
+    from explorer.models import Query
+
+    Query.objects.create(
+        title='example count',
+        sql='select COUNT(*) from images_backend_categorydefinition',
     )
 
+    from django.contrib.auth.models import User
+    User.objects.create_user(username='admin', password='admin', is_superuser=True, is_staff=True)
 
-    
     print("Done!")
     # import pdb
     # pdb.set_trace()
