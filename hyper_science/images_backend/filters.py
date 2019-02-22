@@ -10,9 +10,9 @@ class CategoryDefinitionFilter(filters.FilterSet):
         model = models.CategoryDefinition
 
         fields = {
-            'name': ['exact', 'contains', 'icontains'],
-            'uuid': ['exact'],
-            'parent': ['exact'],
+            'name': ['exact', 'iexact', 'contains', 'icontains'],
+            'uuid': ['exact', 'iexact', 'contains', 'icontains'],
+            'parent__uuid': ['exact', 'iexact', 'contains', 'icontains'],
         }
 
 
@@ -21,7 +21,12 @@ class CategoryDictionaryFilter(filters.FilterSet):
         model = models.CategoryDictionary
 
         fields = {
-            'uuid': ['exact'],
-            'category__uuid': ['exact'],
-            'attribute__uuid': ['exact'],
+            'uuid': ['exact', 'iexact', 'contains', 'icontains'],
+            'category__uuid': ['exact', 'iexact', 'contains', 'icontains'],
+            'category__name': ['exact', 'iexact', 'contains', 'icontains'],
+            'category__parent__uuid': ['exact', 'iexact', 'contains', 'icontains'],
+            'attribute__uuid': ['exact', 'iexact', 'contains', 'icontains'],
+            'attribute__name': ['exact', 'iexact', 'contains', 'icontains'],
+            'attribute__description': ['exact', 'iexact', 'contains', 'icontains'],
+            'attribute__value_type': ['exact', 'iexact'],
         }
