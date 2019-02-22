@@ -43,3 +43,10 @@ Once the environment is setup, you can test some queries, e.g.:
 
 * http://127.0.0.1:8000/api/v1/category_concepts/
 * http://127.0.0.1:8000/api/v1/category_concepts/?attribute__description__icontains=WEIght
+* http://127.0.0.1:8000/api/v1/category_concepts/?attribute__description__icontains=WEIght&format=json
+* http://127.0.0.1:8000/api/v1/category_concepts/?attribute__description__icontains=WEIght&format=xml
+
+
+In the db populator script we added a test query to the SQL explorer, which you can run and extract at:
+
+http://127.0.0.1:8000/api/v1/explorer/1/download
